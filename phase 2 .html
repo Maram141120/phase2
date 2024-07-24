@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <style>
+       
+        .question-container {
+            margin-bottom: 20px;
+        }
+        .answer-button {
+            display: block;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .answer-button:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="question-container">
+        <div id="question">Question will appear here</div>
+        <div id="answers">
+           
+        </div>
+    </div>
+    <script>
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                answers: ["Paris", "London", "Berlin", "Madrid"],
+                correctAnswer: "Paris"
+            },
+            {
+                question: "What is 2 + 2?",
+                answers: ["3", "4", "5", "6"],
+                correctAnswer: "4"
+            }
+           
+        ];
+
+        let currentQuestionIndex = 0;
+        let userResponses = [];
+
+        function displayQuestion(index) {
+            const questionContainer = document.getElementById('question');
+            const answersContainer = document.getElementById('answers');
+
+            answersContainer.innerHTML = '';
+
+         
+            questionContainer.textContent = questions[index].question;
+
+       
+            questions[index].answers.forEach(answer => {
+                const button = document.createElement('div');
+                button.classList.add('answer-button');
+                button.textContent = answer;
+                button.addEventListener('click', () => handleAnswerClick(answer));
+                answersContainer.appendChild(button);
+            });
+        }
+
+        function handleAnswerClick(answer) {
+            userResponses[currentQuestionIndex] = answer;
+            alert(`You selected: ${answer}`);
+           
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                displayQuestion(currentQuestionIndex);
+            } else {
+                alert('Quiz completed!');
+              
+            }
+        }
+
+    
+        displayQuestion(currentQuestionIndex);
+    </script>
+</body>
+</html>
+
